@@ -1,0 +1,27 @@
+.main_content {
+  width: 100vw;
+  height: 70vh;
+  padding-left: 9.2vw;
+  padding-right: 7.1vw;
+}
+
+.page_left {
+  overflow: hidden;
+  background-position: bottom right;
+  background-size: auto 90%;
+  background-repeat: no-repeat;
+}
+
+.page_right {
+  overflow: hidden;
+}
+
+.list_placeholder {
+  width: 45%;
+  height: 100%;
+}
+
+.form_placeholder {
+  height: 256px;
+  border-radius: 4px;
+}

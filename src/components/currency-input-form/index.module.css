@@ -1,0 +1,14 @@
+.form {
+  border-radius: 4px;
+}
+
+.data_list_placeholder {
+  width: 100%;
+  position: relative;
+  transform: translateY(-5px);
+  z-index: 2;
+}
+
+.preview_placeholder {
+  height: 30px;
+}

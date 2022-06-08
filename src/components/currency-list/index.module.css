@@ -1,0 +1,38 @@
+.currency_list {
+    width: 45%;
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.price_tab {
+    width: 100%;
+    height: 80px;
+}
+
+.price_tab:before {
+    content: '';
+    display: block;
+    width: inherit;
+    height: 2px;
+    position: relative;
+    bottom: -100%;
+    background-image: linear-gradient(to right, rgb(138, 120, 156), rgba(138, 120, 156, 0.5), transparent);
+}
+
+.icon {
+    background-position: left center;
+    background-size: 50%;
+    background-repeat: no-repeat;
+    background-image: url('../../assets/images/icon.svg');
+}
+
+.close_button {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+}
+
+.close_button:hover {
+    background-color: rgba(138, 120, 156, 0.25);
+}
