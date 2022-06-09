@@ -25,12 +25,12 @@ import styles from './index.module.css';
 
 
 const CurrencyList = () => {
-  const { appState, setState } = useContext(AppContext);
-  const { trackedCurrencies } = appState;
+  const { state, dispatch } = useContext(AppContext);
+  const { trackedCurrencies } = state;
 
   const handleDelete = (index) => {
     trackedCurrencies.splice(index, 1);
-    setState({ type: "UPDATE_VALUE", value: { trackedCurrencies, ...appState }});
+    dispatch({ type: "UPDATE_CURRENCY_LIST", value: trackedCurrencies });
   }
 
 

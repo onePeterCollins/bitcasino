@@ -5,7 +5,7 @@
  *  */
 
 // internal state
-import React, { Suspense, useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 
 // shared state
 import AppContext from '../../utils/store';
@@ -34,8 +34,8 @@ import styles from './index.module.css';
 
 
 const CurrencyInputForm = () => {
-  const { appState, setState } = useContext(AppContext);
-  const { trackedCurrencies } = appState;
+  const { state, dispatch } = useContext(AppContext);
+  const { trackedCurrencies } = state;
   const [ currencyCode, setCurrencyCode ] = useState('');
   const [ validCurrencyCodes, setValidCurrencyCodes ] = useState([]);
   const [ currencyData, setCurrencyData ] = useState({});
@@ -59,7 +59,7 @@ const CurrencyInputForm = () => {
     if (currencyData) {
       const filteredCurrencyData = PreventIdenticalEntries(currencyData, trackedCurrencies);
 
-      setState({ type: "UPDATE_VALUE", value: { ...appState, trackedCurrencies: filteredCurrencyData } });
+      dispatch({ type: "UPDATE_CURRENCY_LIST", value: filteredCurrencyData });
       setCurrencyCode('');
       setCurrencyData({});
     }
@@ -93,20 +93,16 @@ const CurrencyInputForm = () => {
         list={validCurrencyCodes}
       />
 
-      <Suspense fallback={
-        <div className={`${styles.preview_placeholder}`}></div>
-      }>
-        <div className={`${styles.preview_placeholder}`}>
-          {validCurrencyCodes.indexOf(currencyCode) !== -1 &&
-            <CurrencyPreview
-              currencyCode={currencyCode}
-              currencyData={currencyData}
-              updateCurrencyData={updateCurrencyData}
-              validCurrencyCodes={validCurrencyCodes}
-            />
-          }
-        </div>
-      </Suspense>
+      <div className={`${styles.preview_placeholder}`}>
+        {validCurrencyCodes.indexOf(currencyCode) !== -1 &&
+          <CurrencyPreview
+            currencyCode={currencyCode}
+            currencyData={currencyData}
+            updateCurrencyData={updateCurrencyData}
+            validCurrencyCodes={validCurrencyCodes}
+          />
+        }
+      </div>
 
       <SubmitButton disabled={currencyData?.ticker ? false : true}>Add</SubmitButton>
 

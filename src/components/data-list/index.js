@@ -11,7 +11,8 @@ import PropTypes from 'prop-types';
 import { v4 as uuidv4 } from 'uuid';
 
 // css
-import styles from './index.module.css';
+// default datalist styling in chrome was interferring with custom styles
+// import styles from './index.module.css';
 
 
 
@@ -21,11 +22,11 @@ const DataList = (props) => {
   return (
     <>
       {list?.length > 0 &&
-        <datalist id={id} className={`${styles.data_list}`}>
+        <datalist id={id} /* className={`${styles.data_list}`} */>
           <>
             {list?.map((item) => {
               return (
-                <option className={`${styles.data_list_item} b-background-tint-text font-bold px-6 py-2`}
+                <option /* className={`${styles.data_list_item} b-background-tint-text font-bold px-6 py-2`} */
                   onClick={() => clickHandler(item)}
                   key={uuidv4()}
                   value={item}

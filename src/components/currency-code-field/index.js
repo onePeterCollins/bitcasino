@@ -4,9 +4,6 @@
  * @see      - src/components/currency-input-form
  *  */
 
-// lazy loading
-import React, { Suspense } from 'react';
-
 // type checking
 import PropTypes from 'prop-types';
 
@@ -16,6 +13,9 @@ import { v4 as uuidv4 } from 'uuid';
 // capitalize function
 import { Capitalize } from '../../utils/functions';
 
+// data list
+import DataList from '../data-list';
+
 // css
 import styles from './index.module.css';
 
@@ -24,8 +24,6 @@ import styles from './index.module.css';
 const CurrencyCodeField = (props) => {
   const { capitalize, hint, updateHandler, value, list } = props;
   const dataListId = uuidv4();
-
-  const DataList = list?.length ? React.lazy(() => import('../data-list')) : null;
 
   const updateCurrencyCode = (value) => {
     const currencyCode = capitalize ? Capitalize(value) : value;
@@ -44,9 +42,7 @@ const CurrencyCodeField = (props) => {
       {list?.length > 0 &&
         <>
           {list.indexOf(value) === -1 &&
-            <Suspense fallback={''}>
-              <DataList id={dataListId} list={list} clickHandler={(value) => updateCurrencyCode(value)} />
-            </Suspense>
+            <DataList id={dataListId} list={list} clickHandler={(value) => updateCurrencyCode(value)} />
           }
         </>
       }
