@@ -1,12 +1,8 @@
 # TODO
 
 ## Hosting
-1. Initialize firebase hosting
-2. Deploy on firebase
-
-## Routing
-1. Install react router in dev+router branch
-2. Setup simple routing in dev+router branch
+1. Initialize firebase hosting :heavy_check_mark:
+2. Deploy to firebase :heavy_check_mark:
 
 
 ## Testing

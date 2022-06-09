@@ -5,7 +5,7 @@
  *  */
 
 // internal state
-import { useContext, useState } from "react";
+import { useContext, useReducer } from "react";
 
 // shared state
 import AppContext from './utils/store';
@@ -19,40 +19,33 @@ import MainContent from './components/main-content';
 // footer
 import Footer from './components/footer';
 
+// background image
+import bgImage from './assets/images/bg.png';
+
 
 
 const App = () => {
   const APPSTORE = useContext(AppContext);
 
-  const [ appState, setAppState ] = useState(APPSTORE);
-  const [ bgImage, setBgImage ] = useState(null);
-
-  // state action
-  const setState = (action) => {
+  // reducer
+  const reducer = (state, action) => {
     switch (action.type) {
-      case "UPDATE_VALUE":
-        setAppState(action.value);
-        sessionStorage.setItem('sharedState', JSON.stringify(action.value));
-        break;
+      case "UPDATE_CURRENCY_LIST":
+        // I use this to persist current state when user refreshes the page
+        sessionStorage.setItem('sharedState', JSON.stringify({ ...state, trackedCurrencies: action?.value }));
+        return { ...state, trackedCurrencies: action?.value };
 
       default:
         return;
     }
   }
 
-  // reduce chunk size by deferring image load
-  (async () => {
-    if (!bgImage) {
-      const image = await import("./assets/images/bg.png");
-
-      setBgImage(image.default);
-    }
-  })();
+  const [ state, dispatch ] = useReducer(reducer, APPSTORE);
 
 
   
   return (
-    <AppContext.Provider value={{appState, setState}}>
+    <AppContext.Provider value={{state, dispatch}}>
       <div className="App" style={{backgroundImage: `url(${bgImage})`}}>
         {/* Header */}
         <Header />
